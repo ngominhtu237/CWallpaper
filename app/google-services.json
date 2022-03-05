@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "143659791444",
+    "firebase_url": "https://comic-wallpaper-default-rtdb.firebaseio.com",
+    "project_id": "comic-wallpaper",
+    "storage_bucket": "comic-wallpaper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143659791444:android:da0297141c86fe4a9069c1",
+        "android_client_info": {
+          "package_name": "com.tunm.comicwallpaper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143659791444-gmoiipm7ouc07ocd8graala63mdl44s6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnulZj0z5ykczyx3YbezkM0orb6nCan4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143659791444-gmoiipm7ouc07ocd8graala63mdl44s6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143659791444:android:741855a8bc4a63629069c1",
+        "android_client_info": {
+          "package_name": "com.tunm.cwallpaper2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143659791444-kfurefs0uv91kkl54qv5hp7s1ptqot27.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tunm.cwallpaper2",
+            "certificate_hash": "320d82038f3445dae73e50d1730854bd555dd4dd"
+          }
+        },
+        {
+          "client_id": "143659791444-gmoiipm7ouc07ocd8graala63mdl44s6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnulZj0z5ykczyx3YbezkM0orb6nCan4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143659791444-gmoiipm7ouc07ocd8graala63mdl44s6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
