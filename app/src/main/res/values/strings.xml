@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">CWallpaper2</string>
+
+    <string name="no_internet">Please check your internet connection</string>
+    <string name="network_error">Network error, could get data,please try again!</string>
+    <string name="refresh">refresh</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_recipes">Recipes</string>
+    <string name="title_activity_recipe_details">Recipe Details</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_password">Invalid password</string>
+    <string name="invalid_username_and_password">please check your username and password</string>
+    <string name="search_error">there is no such recipe name</string>
+
+    <string name="create_firebase_user_error">Can\'t create firebase user</string>
 </resources>
