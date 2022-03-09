@@ -1,4 +1,4 @@
-package com.tunm.cwallpaper2.data
+package com.tunm.cwallpaper2.data.repo.user
 
 import androidx.lifecycle.MutableLiveData
 import com.tunm.cwallpaper2.data.dto.auth.AuthRequest
@@ -9,13 +9,13 @@ import com.tunm.cwallpaper2.utils.Validator
 class UsersRepositoryImpl(
     private val usersFirebaseDataSource: UsersFirebaseDataSource
 ): UsersRepository {
-    override fun signupUser(authRequest: AuthRequest): MutableLiveData<FirebaseStatus> {
-        val firebaseStatusLiveData = MutableLiveData<FirebaseStatus>()
+    override fun signupUser(authRequest: AuthRequest, isAdmin: Boolean): MutableLiveData<FirebaseStatus<String>> {
+        var firebaseStatusLiveData = MutableLiveData<FirebaseStatus<String>>()
         val email = authRequest.email
         val password = authRequest.password
         if (Validator.isValidEmail(email)) {
             if (Validator.isValidPassword(password)) {
-                usersFirebaseDataSource.signupUser(authRequest)
+                firebaseStatusLiveData = usersFirebaseDataSource.signupUser(authRequest, isAdmin)
             } else {
                 firebaseStatusLiveData.value = FirebaseStatus.Error("Invalid email")
             }
@@ -29,13 +29,17 @@ class UsersRepositoryImpl(
         return usersFirebaseDataSource.isLogin()
     }
 
-    override fun login(authRequest: AuthRequest): MutableLiveData<FirebaseStatus> {
-        val firebaseStatusLiveData = MutableLiveData<FirebaseStatus>()
+    override fun isLoginWithAdmin(): MutableLiveData<Boolean> {
+        return usersFirebaseDataSource.isLoginWithAdmin()
+    }
+
+    override fun login(authRequest: AuthRequest): MutableLiveData<FirebaseStatus<String>> {
+        var firebaseStatusLiveData = MutableLiveData<FirebaseStatus<String>>()
         val email = authRequest.email
         val password = authRequest.password
         if (Validator.isValidEmail(email)) {
             if (Validator.isValidPassword(password)) {
-                usersFirebaseDataSource.login(authRequest)
+                firebaseStatusLiveData = usersFirebaseDataSource.login(authRequest)
             } else {
                 firebaseStatusLiveData.value = FirebaseStatus.Error("Invalid email")
             }

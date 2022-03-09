@@ -1,4 +1,4 @@
-package com.tunm.cwallpaper2.data.dto
+package com.tunm.cwallpaper2.data.dto.auth
 
 import com.google.firebase.database.IgnoreExtraProperties
 import com.tunm.cwallpaper2.UserType
@@ -10,6 +10,6 @@ data class User(
     val email: String,
     val password: String,
     val profilePhoto: String = "",
-    val userType: UserType,
+    val userType: String,
     val timestamp: Long = 0L
 )

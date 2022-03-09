@@ -1,6 +1,6 @@
 package com.tunm.cwallpaper2.data.remote.firebase
 
-sealed class FirebaseStatus {
-    object Success : FirebaseStatus()
-    class Error(msg: String) : FirebaseStatus()
+sealed class FirebaseStatus<T> {
+    class Success<T>(data: T) : FirebaseStatus<T>()
+    class Error<T>(msg: String) : FirebaseStatus<T>()
 }
