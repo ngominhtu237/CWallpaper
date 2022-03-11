@@ -8,5 +8,6 @@ interface UsersRepository {
     suspend fun signupUser(authRequest: AuthRequest, isAdmin: Boolean = false): FirebaseStatus<String>
     fun isLogin(): Boolean
     fun isLoginWithAdmin(): MutableLiveData<Boolean>
-    fun login(authRequest: AuthRequest): MutableLiveData<FirebaseStatus<String>>
+    suspend fun login(authRequest: AuthRequest): FirebaseStatus<String>
+    fun logout()
 }

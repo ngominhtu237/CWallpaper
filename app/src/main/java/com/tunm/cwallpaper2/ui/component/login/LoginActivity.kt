@@ -7,33 +7,31 @@ import android.view.View
 import androidx.activity.viewModels
 import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
-import com.tunm.cwallpaper2.databinding.ActivityRegisterBinding
+import com.tunm.cwallpaper2.databinding.ActivityLoginBinding
 import com.tunm.cwallpaper2.ui.base.BaseActivity
 import com.tunm.cwallpaper2.ui.component.CategoryManagerActivity
+import com.tunm.cwallpaper2.utils.observe
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterActivity : BaseActivity(), View.OnClickListener {
+class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private val loginViewModel: LoginViewModel by viewModels()
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var binding: ActivityLoginBinding
     override fun observeViewModel() {
-//        observe(loginViewModel.signupResponse) {
-//            handleSignupResult(it)
-//        }
-        loginViewModel.signupResponse.observe(this) {
-            handleSignupResult(it)
+        observe(loginViewModel.loginResponse) {
+            handleLoginResult(it)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.signupBtn.setOnClickListener(this)
+        binding.loginBtn.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.signupBtn -> loginViewModel.signup(
+            R.id.loginBtn -> loginViewModel.login(
                 binding.emailEt.text.toString(),
                 binding.passwordEt.text.toString()
             )
@@ -41,7 +39,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun handleSignupResult(status: FirebaseStatus<String>) {
+    private fun handleLoginResult(status: FirebaseStatus<String>) {
         when (status) {
             is FirebaseStatus.Success -> {
                 startActivity(Intent(this, CategoryManagerActivity::class.java))
@@ -57,7 +55,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initViewBinding() {
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }

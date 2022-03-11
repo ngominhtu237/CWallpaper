@@ -33,19 +33,23 @@ class UsersRepositoryImpl(
         return usersFirebaseDataSource.isLoginWithAdmin()
     }
 
-    override fun login(authRequest: AuthRequest): MutableLiveData<FirebaseStatus<String>> {
-        var firebaseStatusLiveData = MutableLiveData<FirebaseStatus<String>>()
+    override suspend fun login(authRequest: AuthRequest): FirebaseStatus<String> {
+        val firebaseStatus: FirebaseStatus<String>
         val email = authRequest.email
         val password = authRequest.password
         if (Validator.isValidEmail(email)) {
             if (Validator.isValidPassword(password)) {
-                firebaseStatusLiveData = usersFirebaseDataSource.login(authRequest)
+                firebaseStatus = usersFirebaseDataSource.login(authRequest)
             } else {
-                firebaseStatusLiveData.value = FirebaseStatus.Error("Invalid email")
+                firebaseStatus = FirebaseStatus.Error("Invalid password")
             }
         } else {
-            firebaseStatusLiveData.value = FirebaseStatus.Error("Invalid password")
+            firebaseStatus = FirebaseStatus.Error("Invalid email")
         }
-        return firebaseStatusLiveData
+        return firebaseStatus
+    }
+
+    override fun logout() {
+        usersFirebaseDataSource.logout()
     }
 }

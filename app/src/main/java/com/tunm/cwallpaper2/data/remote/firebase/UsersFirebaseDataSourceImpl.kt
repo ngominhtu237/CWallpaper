@@ -1,6 +1,5 @@
 package com.tunm.cwallpaper2.data.remote.firebase
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -77,20 +76,16 @@ class UsersFirebaseDataSourceImpl(
         }
     }
 
-    override fun login(authRequest: AuthRequest): MutableLiveData<FirebaseStatus<String>> {
-        val firebaseStatusLiveData = MutableLiveData<FirebaseStatus<String>>()
-        firebaseAuth.signInWithEmailAndPassword(
-            authRequest.email,
-            authRequest.password
-        ).addOnCompleteListener {  task ->
-            if (task.isSuccessful) {
-                firebaseStatusLiveData.value = FirebaseStatus.Success("")
-            } else {
-                val errorMsg =  "signInWithEmail:failure ${task.exception}"
-                firebaseStatusLiveData.value = FirebaseStatus.Error(errorMsg)
-            }
+    override suspend fun login(authRequest: AuthRequest): FirebaseStatus<String> {
+        return try {
+            var authResult = firebaseAuth.signInWithEmailAndPassword(
+                authRequest.email,
+                authRequest.password
+            ).await()
+            FirebaseStatus.Success("")
+        } catch (e: FirebaseException) {
+            FirebaseStatus.Error("${e.message}")
         }
-        return firebaseStatusLiveData
     }
 
     override fun isLogin(): Boolean {
@@ -115,5 +110,9 @@ class UsersFirebaseDataSourceImpl(
                 }
         }
         return fbLiveData
+    }
+
+    override fun logout() {
+        firebaseAuth.signOut()
     }
 }

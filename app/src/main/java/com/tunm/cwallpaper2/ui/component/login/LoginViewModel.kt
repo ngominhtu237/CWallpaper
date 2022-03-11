@@ -16,12 +16,23 @@ class LoginViewModel @Inject constructor(
     private val usersRepository: UsersRepository
 ) : BaseViewModel() {
 
-    private var signupResponsePrivate = MutableLiveData<FirebaseStatus<String>>()
-    val signupResponse: LiveData<FirebaseStatus<String>> get() = signupResponsePrivate
+    private var _signupResponse = MutableLiveData<FirebaseStatus<String>>()
+    val signupResponse: LiveData<FirebaseStatus<String>> get() = _signupResponse
+    private var _loginResponse = MutableLiveData<FirebaseStatus<String>>()
+    val loginResponse: LiveData<FirebaseStatus<String>> get() = _loginResponse
 
     fun signup(email: String, password: String) {
         viewModelScope.launch {
-            signupResponsePrivate.value = usersRepository.signupUser(AuthRequest(email, password), true)
+            _signupResponse.value = usersRepository.signupUser(AuthRequest(email, password), true)
         }
     }
+
+    fun login(email: String, password: String) {
+        viewModelScope.launch {
+            _loginResponse.value = usersRepository.login(AuthRequest(email, password))
+        }
+    }
+
+    fun isLogin() = usersRepository.isLogin()
+    fun logout() = usersRepository.logout()
 }

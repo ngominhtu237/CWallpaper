@@ -1,50 +1,50 @@
-package com.tunm.cwallpaper2.ui.component.login
+package com.tunm.cwallpaper2.ui.component
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
-import com.tunm.cwallpaper2.databinding.ActivityRegisterBinding
+import com.tunm.cwallpaper2.databinding.ActivityCategoryManagerBinding
 import com.tunm.cwallpaper2.ui.base.BaseActivity
-import com.tunm.cwallpaper2.ui.component.CategoryManagerActivity
+import com.tunm.cwallpaper2.ui.component.login.AppLoginActivity
+import com.tunm.cwallpaper2.ui.component.login.LoginViewModel
+import com.tunm.cwallpaper2.utils.observe
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterActivity : BaseActivity(), View.OnClickListener {
+class CategoryManagerActivity : BaseActivity(), View.OnClickListener {
 
     private val loginViewModel: LoginViewModel by viewModels()
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var binding: ActivityCategoryManagerBinding
     override fun observeViewModel() {
-//        observe(loginViewModel.signupResponse) {
-//            handleSignupResult(it)
-//        }
-        loginViewModel.signupResponse.observe(this) {
-            handleSignupResult(it)
-        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.signupBtn.setOnClickListener(this)
+        binding.logoutBtn.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.signupBtn -> loginViewModel.signup(
-                binding.emailEt.text.toString(),
-                binding.passwordEt.text.toString()
-            )
+            R.id.logoutBtn -> {
+                loginViewModel.logout()
+                Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, AppLoginActivity::class.java))
+                finish()
+            }
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun handleSignupResult(status: FirebaseStatus<String>) {
+    private fun handleLogoutResult(status: FirebaseStatus<String>) {
         when (status) {
             is FirebaseStatus.Success -> {
-                startActivity(Intent(this, CategoryManagerActivity::class.java))
+                startActivity(Intent(this, AppLoginActivity::class.java))
                 finish()
             }
             is FirebaseStatus.Error -> {
@@ -57,7 +57,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initViewBinding() {
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityCategoryManagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
