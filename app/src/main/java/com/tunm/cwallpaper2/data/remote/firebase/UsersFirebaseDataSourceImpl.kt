@@ -1,55 +1,80 @@
 package com.tunm.cwallpaper2.data.remote.firebase
 
-import android.util.Log.i
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.tunm.cwallpaper2.UserType
-import com.tunm.cwallpaper2.data.dto.auth.User
 import com.tunm.cwallpaper2.data.dto.auth.AuthRequest
+import com.tunm.cwallpaper2.data.dto.auth.User
+import kotlinx.coroutines.tasks.await
 import timber.log.Timber
-import java.util.*
 
 class UsersFirebaseDataSourceImpl(
     private val firebaseAuth: FirebaseAuth,
     private val databaseRef: DatabaseReference
 ): UsersFirebaseDataSource {
-    override fun signupUser(authRequest: AuthRequest, isAdmin: Boolean): MutableLiveData<FirebaseStatus<String>> {
-        val firebaseStatusLiveData = MutableLiveData<FirebaseStatus<String>>()
-        firebaseAuth.createUserWithEmailAndPassword(
-            authRequest.email,
-            authRequest.password
-        ).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                // save user to Realtime DB
-                val currentUserId = firebaseAuth.currentUser?.uid
-                val user = User (
-                    email = authRequest.email,
-                    password = authRequest.password,
-                    uid = currentUserId,
-                    userType = if (isAdmin) UserType.ADMIN.type else UserType.USER.type,
-                    timestamp = System.currentTimeMillis()
-                )
+//    override suspend fun signupUser(authRequest: AuthRequest, isAdmin: Boolean): FirebaseStatus<String> {
+//        firebaseAuth.createUserWithEmailAndPassword(
+//            authRequest.email,
+//            authRequest.password
+//        ).addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                // save user to Realtime DB
+//                val currentUserId = firebaseAuth.currentUser?.uid
+//                val user = User (
+//                    email = authRequest.email,
+//                    password = authRequest.password,
+//                    uid = currentUserId,
+//                    userType = if (isAdmin) UserType.ADMIN.type else UserType.USER.type,
+//                    timestamp = System.currentTimeMillis()
+//                )
+//                val usersRef = databaseRef.child("Users")
+//                if (currentUserId != null) {
+//                    usersRef.child(currentUserId).setValue(user)
+//                        .addOnSuccessListener {
+//                            return FirebaseStatus.Success("")
+//                        }
+//                        .addOnFailureListener {
+//                            val errorMsg = "insert user db fail: ${it.message}"
+//                            firebaseStatus = FirebaseStatus.Error(errorMsg)
+//                        }
+//                } else {
+//                    firebaseStatus = FirebaseStatus.Error("currentUserId = null")
+//                }
+//            } else {
+//                val errorMsg = "createUserWithEmail:failure ${task.exception}"
+//                Timber.i(errorMsg)
+//                firebaseStatus = FirebaseStatus.Error(errorMsg)
+//            }
+//        }
+//    }
+
+    override suspend fun signupUser(authRequest: AuthRequest, isAdmin: Boolean): FirebaseStatus<String> {
+        try {
+            var authResult = firebaseAuth.createUserWithEmailAndPassword(
+                authRequest.email,
+                authRequest.password
+            ).await()
+
+            // save user to Realtime DB
+            val currentUserId = firebaseAuth.currentUser?.uid
+            val user = User(
+                email = authRequest.email,
+                password = authRequest.password,
+                uid = currentUserId,
+                userType = if (isAdmin) UserType.ADMIN.type else UserType.USER.type,
+                timestamp = System.currentTimeMillis()
+            )
+            if (currentUserId != null) {
                 val usersRef = databaseRef.child("Users")
-                if (currentUserId != null) {
-                    usersRef.child(currentUserId).setValue(user)
-                        .addOnSuccessListener {
-                            firebaseStatusLiveData.value = FirebaseStatus.Success("")
-                        }
-                        .addOnFailureListener {
-                            val errorMsg = "insert user db fail: ${it.message}"
-                            firebaseStatusLiveData.value = FirebaseStatus.Error(errorMsg)
-                        }
-                } else {
-                    firebaseStatusLiveData.value = FirebaseStatus.Error("currentUserId = null")
-                }
-            } else {
-                val errorMsg = "createUserWithEmail:failure ${task.exception}"
-                Timber.i(errorMsg)
-                firebaseStatusLiveData.value = FirebaseStatus.Error(errorMsg)
+                usersRef.child(currentUserId).setValue(user).await()
             }
+            return FirebaseStatus.Success("")
+        } catch (e: FirebaseException) {
+            return FirebaseStatus.Error("${e.message}")
         }
-        return firebaseStatusLiveData
     }
 
     override fun login(authRequest: AuthRequest): MutableLiveData<FirebaseStatus<String>> {

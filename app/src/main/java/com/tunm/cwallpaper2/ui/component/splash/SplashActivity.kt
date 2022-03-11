@@ -7,7 +7,7 @@ import android.os.Looper
 import com.tunm.cwallpaper2.SPLASH_DELAY
 import com.tunm.cwallpaper2.databinding.SplashLayoutBinding
 import com.tunm.cwallpaper2.ui.base.BaseActivity
-import com.tunm.cwallpaper2.ui.component.login.LoginActivity
+import com.tunm.cwallpaper2.ui.component.login.AppLoginActivity
 
 class SplashActivity: BaseActivity() {
 
@@ -28,7 +28,7 @@ class SplashActivity: BaseActivity() {
 
     private fun navigateToMainScreen() {
         Handler(Looper.getMainLooper()).postDelayed({
-            val nextScreenIntent = Intent(this, LoginActivity::class.java)
+            val nextScreenIntent = Intent(this, AppLoginActivity::class.java)
             startActivity(nextScreenIntent)
             finish()
         }, SPLASH_DELAY.toLong())

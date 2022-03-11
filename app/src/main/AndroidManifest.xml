@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CWallpaper2">
         <activity
-            android:name=".ui.component.login.LoginActivity"
+            android:name=".ui.component.login.AppLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.login.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".ui.component.splash.SplashActivity"

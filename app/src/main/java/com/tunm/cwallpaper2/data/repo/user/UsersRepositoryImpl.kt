@@ -9,20 +9,20 @@ import com.tunm.cwallpaper2.utils.Validator
 class UsersRepositoryImpl(
     private val usersFirebaseDataSource: UsersFirebaseDataSource
 ): UsersRepository {
-    override fun signupUser(authRequest: AuthRequest, isAdmin: Boolean): MutableLiveData<FirebaseStatus<String>> {
-        var firebaseStatusLiveData = MutableLiveData<FirebaseStatus<String>>()
+    override suspend fun signupUser(authRequest: AuthRequest, isAdmin: Boolean): FirebaseStatus<String> {
+        val firebaseStatus: FirebaseStatus<String>
         val email = authRequest.email
         val password = authRequest.password
         if (Validator.isValidEmail(email)) {
             if (Validator.isValidPassword(password)) {
-                firebaseStatusLiveData = usersFirebaseDataSource.signupUser(authRequest, isAdmin)
+                firebaseStatus = usersFirebaseDataSource.signupUser(authRequest, isAdmin)
             } else {
-                firebaseStatusLiveData.value = FirebaseStatus.Error("Invalid email")
+                firebaseStatus = FirebaseStatus.Error("Invalid password")
             }
         } else {
-            firebaseStatusLiveData.value = FirebaseStatus.Error("Invalid password")
+            firebaseStatus = FirebaseStatus.Error("Invalid email")
         }
-        return firebaseStatusLiveData
+        return firebaseStatus
     }
 
     override fun isLogin(): Boolean {
