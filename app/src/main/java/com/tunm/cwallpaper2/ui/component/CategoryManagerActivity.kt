@@ -5,18 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
 import com.tunm.cwallpaper2.databinding.ActivityCategoryManagerBinding
-import com.tunm.cwallpaper2.ui.base.BaseActivity
+import com.tunm.cwallpaper2.ui.base.BaseActivityBinding
 import com.tunm.cwallpaper2.ui.component.login.AppLoginActivity
 import com.tunm.cwallpaper2.ui.component.login.LoginViewModel
-import com.tunm.cwallpaper2.utils.observe
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoryManagerActivity : BaseActivity(), View.OnClickListener {
+class CategoryManagerActivity : BaseActivityBinding(), View.OnClickListener {
 
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var binding: ActivityCategoryManagerBinding

@@ -8,15 +8,16 @@ import androidx.activity.viewModels
 import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
 import com.tunm.cwallpaper2.databinding.ActivityRegisterBinding
-import com.tunm.cwallpaper2.ui.base.BaseActivity
+import com.tunm.cwallpaper2.ui.base.BaseActivityBinding
 import com.tunm.cwallpaper2.ui.component.CategoryManagerActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterActivity : BaseActivity(), View.OnClickListener {
+class RegisterActivity : BaseActivityBinding<ActivityRegisterBinding>(
+    ActivityRegisterBinding::inflate
+), View.OnClickListener {
 
     private val loginViewModel: LoginViewModel by viewModels()
-    private lateinit var binding: ActivityRegisterBinding
     override fun observeViewModel() {
 //        observe(loginViewModel.signupResponse) {
 //            handleSignupResult(it)
@@ -54,10 +55,5 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                 binding.resultTv.visibility = View.VISIBLE
             }
         }
-    }
-
-    override fun initViewBinding() {
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(binding.root)
     }
 }

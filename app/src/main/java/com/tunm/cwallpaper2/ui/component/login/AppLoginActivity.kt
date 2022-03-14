@@ -6,14 +6,15 @@ import android.view.View
 import androidx.activity.viewModels
 import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.databinding.ActivityAppLoginBinding
-import com.tunm.cwallpaper2.ui.base.BaseActivity
+import com.tunm.cwallpaper2.ui.base.BaseActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AppLoginActivity : BaseActivity(), View.OnClickListener {
+class AppLoginActivity : BaseActivityBinding<ActivityAppLoginBinding>(
+    ActivityAppLoginBinding::inflate
+), View.OnClickListener {
 
     private val loginViewModel: LoginViewModel by viewModels()
-    private lateinit var binding: ActivityAppLoginBinding
     override fun observeViewModel() {
     }
 
@@ -34,10 +35,5 @@ class AppLoginActivity : BaseActivity(), View.OnClickListener {
                 finish()
             }
         }
-    }
-
-    override fun initViewBinding() {
-        binding = ActivityAppLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
     }
 }
