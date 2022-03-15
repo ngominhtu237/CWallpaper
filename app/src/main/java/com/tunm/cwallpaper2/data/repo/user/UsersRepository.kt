@@ -1,6 +1,7 @@
 package com.tunm.cwallpaper2.data.repo.user
 
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseUser
 import com.tunm.cwallpaper2.data.dto.auth.AuthRequest
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
 
@@ -10,4 +11,5 @@ interface UsersRepository {
     fun isLoginWithAdmin(): MutableLiveData<Boolean>
     suspend fun login(authRequest: AuthRequest): FirebaseStatus<String>
     fun logout()
+    fun getCurrentUser(): FirebaseUser?
 }

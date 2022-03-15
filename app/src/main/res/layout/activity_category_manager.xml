@@ -7,7 +7,7 @@
     tools:context=".ui.component.CategoryManagerActivity">
 
     <Button
-        android:id="@+id/logoutBtn"
+        android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -25,5 +25,5 @@
         android:text="TextView"
         android:textColor="@color/purple_500"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoutBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,13 +9,15 @@ import androidx.viewbinding.ViewBinding
 import java.lang.IllegalArgumentException
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
-class BaseFragmentBinding<VB: ViewBinding> (
+abstract class BaseFragmentBinding<VB: ViewBinding> (
     private val bindingInflater: Inflate<VB>
 ): Fragment() {
 
     private var _binding: VB? = null
     val binding: VB
         get() = _binding as VB
+
+    abstract fun observeViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,8 +26,15 @@ class BaseFragmentBinding<VB: ViewBinding> (
     ): View {
         _binding = bindingInflater.invoke(inflater, container, false)
         if (_binding == null) throw IllegalArgumentException("Binding cannot be null")
+        updateUI()
+        setupListeners()
+        observeViewModel()
         return binding.root
     }
+
+    abstract fun setupListeners()
+
+    abstract fun updateUI()
 
     override fun onDestroyView() {
         super.onDestroyView()

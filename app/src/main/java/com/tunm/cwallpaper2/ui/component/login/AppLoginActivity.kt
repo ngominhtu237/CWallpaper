@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.databinding.ActivityAppLoginBinding
 import com.tunm.cwallpaper2.ui.base.BaseActivityBinding
+import com.tunm.cwallpaper2.ui.component.profile.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,14 +21,14 @@ class AppLoginActivity : BaseActivityBinding<ActivityAppLoginBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.loginBtn.setOnClickListener(this)
+        binding.btnLogin.setOnClickListener(this)
         binding.signupBtn.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.loginBtn -> {
-                startActivity(Intent(this, LoginActivity::class.java))
+            R.id.btnLogin -> {
+                startActivity(Intent(this, LoginFragment::class.java))
                 finish()
             }
             R.id.signupBtn -> {

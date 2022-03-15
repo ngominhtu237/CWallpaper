@@ -3,6 +3,7 @@ package com.tunm.cwallpaper2.data.remote.firebase
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.tunm.cwallpaper2.UserType
 import com.tunm.cwallpaper2.data.dto.auth.AuthRequest
@@ -90,6 +91,10 @@ class UsersFirebaseDataSourceImpl(
 
     override fun isLogin(): Boolean {
         return firebaseAuth.currentUser != null
+    }
+
+    override fun getCurrentUser(): FirebaseUser? {
+        return firebaseAuth.currentUser
     }
 
     /**

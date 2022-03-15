@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.activity.viewModels
+import com.tunm.cwallpaper2.MainActivity
 import com.tunm.cwallpaper2.SPLASH_DELAY
 import com.tunm.cwallpaper2.databinding.SplashLayoutBinding
 import com.tunm.cwallpaper2.ui.base.BaseActivityBinding
@@ -34,11 +35,7 @@ class SplashActivity: BaseActivityBinding<SplashLayoutBinding>(
 
     private fun navigateToMainScreen() {
         Handler(Looper.getMainLooper()).postDelayed({
-            if (loginViewModel.isLogin()) {
-                startActivity(Intent(this, CategoryManagerActivity::class.java))
-            } else {
-                startActivity(Intent(this, AppLoginActivity::class.java))
-            }
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, SPLASH_DELAY.toLong())
     }

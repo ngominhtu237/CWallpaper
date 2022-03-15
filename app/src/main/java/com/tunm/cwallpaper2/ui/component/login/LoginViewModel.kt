@@ -34,5 +34,9 @@ class LoginViewModel @Inject constructor(
     }
 
     fun isLogin() = usersRepository.isLogin()
-    fun logout() = usersRepository.logout()
+    fun logout() {
+        usersRepository.logout()
+        _loginResponse.value = null
+    }
+    fun getProfile() = usersRepository.getCurrentUser()
 }

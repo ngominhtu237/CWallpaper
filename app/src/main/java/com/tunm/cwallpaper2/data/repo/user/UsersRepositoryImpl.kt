@@ -1,6 +1,7 @@
 package com.tunm.cwallpaper2.data.repo.user
 
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseUser
 import com.tunm.cwallpaper2.data.dto.auth.AuthRequest
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
 import com.tunm.cwallpaper2.data.remote.firebase.UsersFirebaseDataSource
@@ -51,5 +52,9 @@ class UsersRepositoryImpl(
 
     override fun logout() {
         usersFirebaseDataSource.logout()
+    }
+
+    override fun getCurrentUser(): FirebaseUser? {
+        return usersFirebaseDataSource.getCurrentUser()
     }
 }

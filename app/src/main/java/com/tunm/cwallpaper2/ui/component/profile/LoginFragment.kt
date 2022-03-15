@@ -1,41 +1,39 @@
-package com.tunm.cwallpaper2.ui.component.login
+package com.tunm.cwallpaper2.ui.component.profile
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
-import com.tunm.cwallpaper2.databinding.ActivityLoginBinding
-import com.tunm.cwallpaper2.ui.base.BaseActivityBinding
+import com.tunm.cwallpaper2.databinding.FragmentLoginBinding
+import com.tunm.cwallpaper2.ui.base.BaseFragmentBinding
 import com.tunm.cwallpaper2.ui.component.CategoryManagerActivity
+import com.tunm.cwallpaper2.ui.component.login.LoginViewModel
 import com.tunm.cwallpaper2.utils.observe
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : BaseActivityBinding<ActivityLoginBinding>(
-    ActivityLoginBinding::inflate
+class LoginFragment : BaseFragmentBinding<FragmentLoginBinding>(
+    FragmentLoginBinding::inflate
 ), View.OnClickListener {
 
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by activityViewModels()
     override fun observeViewModel() {
         observe(loginViewModel.loginResponse) {
             handleLoginResult(it)
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding.loginBtn.setOnClickListener(this)
-    }
-
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.loginBtn -> loginViewModel.login(
-                binding.emailEt.text.toString(),
-                binding.passwordEt.text.toString()
-            )
+            R.id.btnLogin -> {
+                loginViewModel.login(
+                    binding.emailEt.text.toString(),
+                    binding.passwordEt.text.toString()
+                )
+            }
         }
     }
 
@@ -43,8 +41,8 @@ class LoginActivity : BaseActivityBinding<ActivityLoginBinding>(
     private fun handleLoginResult(status: FirebaseStatus<String>) {
         when (status) {
             is FirebaseStatus.Success -> {
-                startActivity(Intent(this, CategoryManagerActivity::class.java))
-                finish()
+                val action = LoginFragmentDirections.actionLoginDestToProfileDest()
+                findNavController().navigate(action)
             }
             is FirebaseStatus.Error -> {
                 status.msg?.let {
@@ -53,5 +51,13 @@ class LoginActivity : BaseActivityBinding<ActivityLoginBinding>(
                 binding.resultTv.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun setupListeners() {
+        binding.btnLogin.setOnClickListener(this)
+    }
+
+    override fun updateUI() {
+        binding.resultTv.text = ""
     }
 }

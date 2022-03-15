@@ -1,6 +1,7 @@
 package com.tunm.cwallpaper2.data.remote.firebase
 
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseUser
 import com.tunm.cwallpaper2.data.dto.auth.AuthRequest
 
 interface UsersFirebaseDataSource {
@@ -9,4 +10,5 @@ interface UsersFirebaseDataSource {
     fun isLogin(): Boolean
     fun isLoginWithAdmin(): MutableLiveData<Boolean>
     fun logout()
+    fun getCurrentUser(): FirebaseUser?
 }
