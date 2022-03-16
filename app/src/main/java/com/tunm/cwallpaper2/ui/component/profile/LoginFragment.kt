@@ -26,6 +26,10 @@ class LoginFragment : BaseFragmentBinding<FragmentLoginBinding>(
         }
     }
 
+    override fun initToolbar() {
+        binding.toolbar.titleTV.text = getString(R.string.login)
+    }
+
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.btnLogin -> {
@@ -57,7 +61,7 @@ class LoginFragment : BaseFragmentBinding<FragmentLoginBinding>(
         binding.btnLogin.setOnClickListener(this)
     }
 
-    override fun updateUI() {
+    override fun initUI() {
         binding.resultTv.text = ""
     }
 }

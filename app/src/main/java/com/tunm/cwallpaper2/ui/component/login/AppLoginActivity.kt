@@ -8,6 +8,7 @@ import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.databinding.ActivityAppLoginBinding
 import com.tunm.cwallpaper2.ui.base.BaseActivityBinding
 import com.tunm.cwallpaper2.ui.component.profile.LoginFragment
+import com.tunm.cwallpaper2.ui.component.profile.RegisterFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,7 +33,7 @@ class AppLoginActivity : BaseActivityBinding<ActivityAppLoginBinding>(
                 finish()
             }
             R.id.signupBtn -> {
-                startActivity(Intent(this, RegisterActivity::class.java))
+                startActivity(Intent(this, RegisterFragment::class.java))
                 finish()
             }
         }

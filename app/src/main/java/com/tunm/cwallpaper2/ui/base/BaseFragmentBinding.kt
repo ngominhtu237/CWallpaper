@@ -26,15 +26,18 @@ abstract class BaseFragmentBinding<VB: ViewBinding> (
     ): View {
         _binding = bindingInflater.invoke(inflater, container, false)
         if (_binding == null) throw IllegalArgumentException("Binding cannot be null")
-        updateUI()
+        initUI()
+        initToolbar()
         setupListeners()
         observeViewModel()
         return binding.root
     }
 
+    abstract fun initToolbar()
+
     abstract fun setupListeners()
 
-    abstract fun updateUI()
+    abstract fun initUI()
 
     override fun onDestroyView() {
         super.onDestroyView()

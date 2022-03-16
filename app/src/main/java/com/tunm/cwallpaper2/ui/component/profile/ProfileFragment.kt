@@ -3,10 +3,7 @@ package com.tunm.cwallpaper2.ui.component.profile
 import android.annotation.SuppressLint
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
 import com.tunm.cwallpaper2.databinding.FragmentProfileBinding
@@ -29,11 +26,14 @@ class ProfileFragment : BaseFragmentBinding<FragmentProfileBinding>(
         }
     }
 
+    override fun initToolbar() {
+    }
+
     @SuppressLint("SetTextI18n")
     private fun handleLoginResult(status: FirebaseStatus<String>) {
         when (status) {
             is FirebaseStatus.Success -> {
-                updateUI()
+                initUI()
             }
             is FirebaseStatus.Error -> {
                 binding.apply {
@@ -47,18 +47,19 @@ class ProfileFragment : BaseFragmentBinding<FragmentProfileBinding>(
         }
     }
 
-    override fun updateUI() {
+    override fun initUI() {
         if (loginViewModel.isLogin()) {
             val user = loginViewModel.getProfile()
             binding.apply {
-                tvName.text = user?.displayName ?: "N/A"
+                tvName.text = if (user?.displayName.isNullOrEmpty()) "N/A" else user?.displayName
                 tvEmail.text = user?.email ?: "N/A"
-                tvId.text = user?.uid ?: "N/A"
                 groupLogin.visibility = View.VISIBLE
                 groupNonLogin.visibility = View.GONE
             }
         } else {
             binding.apply {
+                tvName.text = "Guest"
+                tvEmail.text = "N/A"
                 groupNonLogin.visibility = View.VISIBLE
                 groupLogin.visibility = View.GONE
             }
@@ -69,23 +70,26 @@ class ProfileFragment : BaseFragmentBinding<FragmentProfileBinding>(
         binding.apply {
             btnLogin.setOnClickListener(this@ProfileFragment)
             btnLogout.setOnClickListener(this@ProfileFragment)
-            btnUpdate.setOnClickListener(this@ProfileFragment)
+            btnProfileDetails.setOnClickListener(this@ProfileFragment)
         }
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.btnLogin -> {
-                Timber.d("Click update button")
                 val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
                 findNavController().navigate(action)
             }
+//            R.id.btnRegister -> {
+//                val action = ProfileFragmentDirections.actionProfileDestToRegisterDest()
+//                findNavController().navigate(action)
+//            }
             R.id.btnLogout -> {
                 loginViewModel.logout()
-                updateUI()
+                initUI()
             }
-            R.id.btnUpdate -> {
-                Timber.d("Click update button")
+            R.id.btnProfileDetails -> {
+                Timber.d("Click profile details")
             }
         }
     }
