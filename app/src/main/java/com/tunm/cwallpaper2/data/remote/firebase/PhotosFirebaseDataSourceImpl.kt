@@ -6,8 +6,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.tunm.cwallpaper2.data.dto.category.CategoryRequest
-import com.tunm.cwallpaper2.data.dto.category.ListCategory
+import com.tunm.cwallpaper2.data.dto.category.Category
 import com.tunm.cwallpaper2.data.dto.photo.ListPhoto
 import com.tunm.cwallpaper2.data.dto.photo.Photo
 
@@ -15,7 +14,7 @@ class PhotosFirebaseDataSourceImpl(
     private val firebaseAuth: FirebaseAuth,
     private val databaseRef: DatabaseReference
 ): PhotosFirebaseDataSource {
-    override fun addPhotoByAdmin(photoRequest: Photo, categoryId: CategoryRequest): MutableLiveData<FirebaseStatus<String>> {
+    override fun addPhotoByAdmin(photoRequest: Photo, categoryId: Category): MutableLiveData<FirebaseStatus<String>> {
         val firebaseStatusLiveData = MutableLiveData<FirebaseStatus<String>>()
         val currentUserId = firebaseAuth.currentUser?.uid
         if (currentUserId != null) {

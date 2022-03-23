@@ -2,6 +2,8 @@ package com.tunm.cwallpaper2.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.tunm.cwallpaper2.data.remote.firebase.*
 import dagger.Module
 import dagger.Provides
@@ -26,9 +28,10 @@ object RemoteDataModule {
     @Provides
     fun provideCategoryFirebaseDataSource(
         firebaseAuth: FirebaseAuth,
-        databaseRef: DatabaseReference
+        databaseRef: DatabaseReference,
+        storageRef: StorageReference
     ): CategoryFirebaseDataSource {
-        return CategoryFirebaseDataSourceImpl(firebaseAuth, databaseRef)
+        return CategoryFirebaseDataSourceImpl(firebaseAuth, databaseRef, storageRef)
     }
 
     @Singleton

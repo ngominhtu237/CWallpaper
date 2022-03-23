@@ -4,4 +4,8 @@
         <attr name="textName" format="string" />
         <attr name="customIcon" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="FillColumnView">
+        <attr name="fill_column_text_hint" format="string" />
+    </declare-styleable>
 </resources>

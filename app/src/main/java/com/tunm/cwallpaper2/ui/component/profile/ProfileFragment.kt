@@ -71,6 +71,8 @@ class ProfileFragment : BaseFragmentBinding<FragmentProfileBinding>(
             btnLogin.setOnClickListener(this@ProfileFragment)
             btnLogout.setOnClickListener(this@ProfileFragment)
             btnProfileDetails.setOnClickListener(this@ProfileFragment)
+            btnCategoryManager.setOnClickListener(this@ProfileFragment)
+            tvName.setOnClickListener(this@ProfileFragment)
         }
     }
 
@@ -80,10 +82,10 @@ class ProfileFragment : BaseFragmentBinding<FragmentProfileBinding>(
                 val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
                 findNavController().navigate(action)
             }
-//            R.id.btnRegister -> {
-//                val action = ProfileFragmentDirections.actionProfileDestToRegisterDest()
-//                findNavController().navigate(action)
-//            }
+            R.id.btnCategoryManager -> {
+                val action = ProfileFragmentDirections.actionProfileDestToCategoryManageDest()
+                findNavController().navigate(action)
+            }
             R.id.btnLogout -> {
                 loginViewModel.logout()
                 initUI()
@@ -91,6 +93,13 @@ class ProfileFragment : BaseFragmentBinding<FragmentProfileBinding>(
             R.id.btnProfileDetails -> {
                 Timber.d("Click profile details")
             }
+            R.id.edtName -> {
+                loginViewModel.loginResponse.value = FirebaseStatus.Error("Error")
+            }
         }
+    }
+
+    override fun handleBack() {
+
     }
 }

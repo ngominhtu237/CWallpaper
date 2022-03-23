@@ -26,7 +26,6 @@ class CategoryManagerActivity: BaseActivityBinding<ActivityCategoryManagerBindin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.btnLogout.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
@@ -46,12 +45,6 @@ class CategoryManagerActivity: BaseActivityBinding<ActivityCategoryManagerBindin
             is FirebaseStatus.Success -> {
                 startActivity(Intent(this, AppLoginActivity::class.java))
                 finish()
-            }
-            is FirebaseStatus.Error -> {
-                status.msg?.let {
-                    binding.resultTv.text = it
-                }
-                binding.resultTv.visibility = View.VISIBLE
             }
         }
     }

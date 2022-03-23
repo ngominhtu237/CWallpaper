@@ -10,11 +10,35 @@
         android:name="com.tunm.cwallpaper2.ui.component.home.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" />
+
     <fragment
         android:id="@+id/category_dest"
         android:name="com.tunm.cwallpaper2.CategoryFragment"
         android:label="@string/category"
         tools:layout="@layout/fragment_category" />
+
+    <fragment
+        android:id="@+id/category_manage_dest"
+        android:name="com.tunm.cwallpaper2.ui.component.category.CategoryManagerFragment"
+        android:label="@string/category"
+        tools:layout="@layout/fragment_category_manager" >
+        <action
+            android:id="@+id/action_category_manage_dest_to_profile_dest"
+            app:destination="@id/profile_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/profile_dest"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_category_manage_dest_to_addCategoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/add_category_dest" />
+    </fragment>
     <fragment
         android:id="@+id/profile_dest"
         android:name="com.tunm.cwallpaper2.ui.component.profile.ProfileFragment"
@@ -26,6 +50,14 @@
         <action
             android:id="@+id/action_profile_dest_to_register_dest"
             app:destination="@id/register_dest"/>
+        <action
+            android:id="@+id/action_profile_dest_to_category_manage_dest"
+            app:destination="@id/category_manage_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/login_dest"
@@ -47,5 +79,20 @@
             android:id="@+id/action_register_dest_to_profile_dest"
             app:destination="@id/profile_dest"
             app:popUpTo="@id/profile_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/add_category_dest"
+        android:name="com.tunm.cwallpaper2.ui.component.category.AddCategoryFragment"
+        android:label="fragment_add_category"
+        tools:layout="@layout/fragment_add_category">
+        <action
+            android:id="@+id/action_addCategoryFragment_to_category_manage_dest"
+            app:destination="@id/category_manage_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/category_manage_dest"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

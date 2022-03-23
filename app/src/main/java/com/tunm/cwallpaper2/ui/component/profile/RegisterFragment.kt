@@ -63,4 +63,8 @@ class RegisterFragment : BaseFragmentBinding<FragmentRegisterBinding>(
     override fun initUI() {
 
     }
+
+    override fun handleBack() {
+
+    }
 }

@@ -19,7 +19,7 @@ class LoginViewModel @Inject constructor(
     private var _signupResponse = MutableLiveData<FirebaseStatus<String>>()
     val signupResponse: LiveData<FirebaseStatus<String>> get() = _signupResponse
     private var _loginResponse = MutableLiveData<FirebaseStatus<String>>()
-    val loginResponse: LiveData<FirebaseStatus<String>> get() = _loginResponse
+    val loginResponse: MutableLiveData<FirebaseStatus<String>> get() = _loginResponse
 
     fun signup(email: String, password: String) {
         viewModelScope.launch {

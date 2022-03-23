@@ -1,7 +1,6 @@
 package com.tunm.cwallpaper2.ui.component.profile
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -9,7 +8,6 @@ import com.tunm.cwallpaper2.R
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
 import com.tunm.cwallpaper2.databinding.FragmentLoginBinding
 import com.tunm.cwallpaper2.ui.base.BaseFragmentBinding
-import com.tunm.cwallpaper2.ui.component.CategoryManagerActivity
 import com.tunm.cwallpaper2.ui.component.login.LoginViewModel
 import com.tunm.cwallpaper2.utils.observe
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,5 +61,9 @@ class LoginFragment : BaseFragmentBinding<FragmentLoginBinding>(
 
     override fun initUI() {
         binding.resultTv.text = ""
+    }
+
+    override fun handleBack() {
+
     }
 }

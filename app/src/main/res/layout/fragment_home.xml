@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.component.home.HomeFragment">
 
+    <include android:id="@+id/toolbar"
+        layout="@layout/profile_toolbar" />
+
     <TextView
         android:id="@+id/texview"
         android:layout_width="0dp"
@@ -14,6 +17,6 @@
         android:layout_marginTop="4dp"
         android:text="Home Fragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
