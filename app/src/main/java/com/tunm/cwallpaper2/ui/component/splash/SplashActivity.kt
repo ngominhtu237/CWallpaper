@@ -10,8 +10,6 @@ import com.tunm.cwallpaper2.MainActivity
 import com.tunm.cwallpaper2.SPLASH_DELAY
 import com.tunm.cwallpaper2.databinding.SplashLayoutBinding
 import com.tunm.cwallpaper2.ui.base.BaseActivityBinding
-import com.tunm.cwallpaper2.ui.component.CategoryManagerActivity
-import com.tunm.cwallpaper2.ui.component.login.AppLoginActivity
 import com.tunm.cwallpaper2.ui.component.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

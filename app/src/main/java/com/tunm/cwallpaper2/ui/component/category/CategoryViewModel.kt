@@ -27,6 +27,7 @@ class CategoryViewModel @Inject constructor(
     val addCategoryResponse: LiveData<FirebaseStatus<String>> get() = _addCategoryResponse
 
     fun addCategoryByAdmin(categoryRequest: Category) {
+        _addCategoryResponse.value = FirebaseStatus.Loading()
         viewModelScope.launch {
             _addCategoryResponse.value = categoryRepository.addCategoryByAdmin(categoryRequest)
         }

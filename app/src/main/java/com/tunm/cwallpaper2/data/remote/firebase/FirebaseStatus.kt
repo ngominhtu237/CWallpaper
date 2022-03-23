@@ -6,4 +6,5 @@ sealed class FirebaseStatus<T>(
 ) {
     class Success<T>(data: T) : FirebaseStatus<T>(data, null)
     class Error<T>(msg: String) : FirebaseStatus<T>(null, msg)
+    class Loading<T>(data: T? = null) : FirebaseStatus<T>(data)
 }

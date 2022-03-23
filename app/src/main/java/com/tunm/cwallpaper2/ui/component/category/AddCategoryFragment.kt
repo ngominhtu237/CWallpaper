@@ -40,12 +40,17 @@ class AddCategoryFragment : BaseFragmentBinding<FragmentAddCategoryBinding>(
         when (status) {
             is FirebaseStatus.Success -> {
                 handleBack()
+                binding.loadingView.visibility = View.GONE
             }
             is FirebaseStatus.Error -> {
                 status.msg?.let {
                     binding.tvStatusMsg.text = it
                 }
                 binding.tvStatusMsg.visibility = View.VISIBLE
+                binding.loadingView.visibility = View.GONE
+            }
+            is FirebaseStatus.Loading -> {
+                binding.loadingView.visibility = View.VISIBLE
             }
         }
     }

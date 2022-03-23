@@ -22,4 +22,28 @@
     <!-- Profile -->
     <color name="profile_column_bg">#F6F7F9</color>
     <color name="fill_column_bg">#F3F5F7</color>
+
+    <color name="google_green">#FF0F9D58</color>
+    <color name="blue">#FF33B5E5</color>
+    <color name="purple">#FFAA66CC</color>
+    <color name="green">#FF99CC00</color>
+    <color name="orange">#FFFFBB33</color>
+    <color name="red">#FFFF4444</color>
+    <color name="darkblue">#FF0099CC</color>
+    <color name="darkpurple">#FF9933CC</color>
+    <color name="darkgreen">#FF669900</color>
+    <color name="darkorange">#FFFF8800</color>
+    <color name="darkred">#FFCC0000</color>
+    <color name="very_lighter_gray">#DDD</color>
+    <color name="lighter_gray">#AAA</color>
+    <color name="darker_gray">#99000000</color>
+    <color name="visa_action_golden">#F9A714</color>
+
+    <color name="background_light_blue">#467FCF</color>
+    <color name="separator">#FF909090</color>
+    <color name="promo_background">#B1B7C1</color>
+    <color name="promo_item_label_color">#BBBBBB</color>
+    <color name="promo_item_label_background">#99444444</color>
+    <color name="wallet_details_color">#000000</color>
+    <color name="wallet_dark_grey">#666666</color>
 </resources>
