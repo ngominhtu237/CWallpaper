@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.tunm.cwallpaper2.databinding.ActivityAppLoginBinding
 import java.lang.IllegalArgumentException
 
 abstract class BaseActivityBinding<VB: ViewBinding>(

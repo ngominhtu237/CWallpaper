@@ -16,7 +16,6 @@ import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
 import com.tunm.cwallpaper2.databinding.FragmentAddCategoryBinding
 import com.tunm.cwallpaper2.ui.base.BaseFragmentBinding
 import com.tunm.cwallpaper2.ui.component.login.LoginViewModel
-import com.tunm.cwallpaper2.ui.component.profile.RegisterFragmentDirections
 import com.tunm.cwallpaper2.utils.observe
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -107,7 +106,6 @@ class AddCategoryFragment : BaseFragmentBinding<FragmentAddCategoryBinding>(
     }
 
     override fun handleBack() {
-        val action = AddCategoryFragmentDirections.actionAddCategoryFragmentToCategoryManageDest()
-        findNavController().navigate(action)
+        findNavController().navigate(R.id.action_addCategoryFragment_to_category_manage_dest)
     }
 }

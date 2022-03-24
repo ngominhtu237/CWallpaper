@@ -44,8 +44,7 @@ class RegisterFragment : BaseFragmentBinding<FragmentRegisterBinding>(
     private fun handleSignupResult(status: FirebaseStatus<String>) {
         when (status) {
             is FirebaseStatus.Success -> {
-                val action = RegisterFragmentDirections.actionRegisterDestToProfileDest()
-                findNavController().navigate(action)
+                findNavController().navigate(R.id.action_register_dest_to_profile_dest)
             }
             is FirebaseStatus.Error -> {
                 status.msg?.let {

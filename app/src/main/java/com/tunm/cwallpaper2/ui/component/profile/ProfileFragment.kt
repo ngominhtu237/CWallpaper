@@ -79,12 +79,10 @@ class ProfileFragment : BaseFragmentBinding<FragmentProfileBinding>(
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.btnLogin -> {
-                val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
-                findNavController().navigate(action)
+                findNavController().navigate(R.id.actionProfileFragmentToLoginFragment)
             }
             R.id.btnCategoryManager -> {
-                val action = ProfileFragmentDirections.actionProfileDestToCategoryManageDest()
-                findNavController().navigate(action)
+                findNavController().navigate(R.id.action_profile_dest_to_category_manage_dest)
             }
             R.id.btnLogout -> {
                 loginViewModel.logout()

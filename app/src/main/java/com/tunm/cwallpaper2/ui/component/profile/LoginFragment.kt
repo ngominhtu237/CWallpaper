@@ -43,8 +43,7 @@ class LoginFragment : BaseFragmentBinding<FragmentLoginBinding>(
     private fun handleLoginResult(status: FirebaseStatus<String>) {
         when (status) {
             is FirebaseStatus.Success -> {
-                val action = LoginFragmentDirections.actionLoginDestToProfileDest()
-                findNavController().navigate(action)
+                findNavController().navigate(R.id.action_login_dest_to_profile_dest)
             }
             is FirebaseStatus.Error -> {
                 status.msg?.let {

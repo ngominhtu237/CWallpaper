@@ -2,6 +2,7 @@ package com.tunm.cwallpaper2
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
@@ -9,8 +10,11 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.tunm.cwallpaper2.databinding.ActivityMainBinding
 import com.tunm.cwallpaper2.ui.base.BaseActivityBinding
 import com.tunm.cwallpaper2.ui.component.category.CategoryViewModel
@@ -31,7 +35,17 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.bottomNavigationView.setupWithNavController(getNavController())
+        binding.bottomNavigationView.apply {
+            setupWithNavController(getNavController())
+        }
+
+        getNavHostFragment().childFragmentManager.addOnBackStackChangedListener {
+            if (getNavHostFragment().childFragmentManager.backStackEntryCount == 0) {
+                Timber.d("stack count: empty")
+            } else {
+                Timber.d("stack count: ${getNavHostFragment().childFragmentManager.backStackEntryCount}")
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -39,8 +53,11 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>(
     }
 
     private fun getNavController(): NavController {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        return navHostFragment.navController
+        return getNavHostFragment().navController
+    }
+
+    private fun getNavHostFragment(): NavHostFragment {
+        return supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
     }
 
     override fun onClick(view: View?) {

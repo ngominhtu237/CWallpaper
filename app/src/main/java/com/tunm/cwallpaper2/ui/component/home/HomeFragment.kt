@@ -33,7 +33,7 @@ class HomeFragment : BaseFragmentBinding<FragmentHomeBinding>(
     }
 
     override fun initToolbar() {
-        binding.toolbar.titleTV.text = getString(R.string.profile)
+        binding.toolbar.titleTV.text = getString(R.string.home)
     }
 
     override fun handleBack() {

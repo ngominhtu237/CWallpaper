@@ -13,7 +13,6 @@ import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
 import com.tunm.cwallpaper2.databinding.FragmentCategoryManagerBinding
 import com.tunm.cwallpaper2.ui.base.BaseFragmentBinding
 import com.tunm.cwallpaper2.ui.component.login.LoginViewModel
-import com.tunm.cwallpaper2.ui.component.profile.ProfileFragmentDirections
 import com.tunm.cwallpaper2.utils.observe
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -43,9 +42,14 @@ class CategoryManagerFragment : BaseFragmentBinding<FragmentCategoryManagerBindi
                     Timber.d("data - ${it.categoryName}, ")
                 }
                 status.data?.let { categoryAdapter.updateData(it) }
+                binding.loadingView.visibility = View.GONE
             }
             is FirebaseStatus.Error -> {
                 Toast.makeText(context, status.msg, Toast.LENGTH_SHORT).show()
+                binding.loadingView.visibility = View.GONE
+            }
+            is FirebaseStatus.Loading -> {
+                binding.loadingView.visibility = View.VISIBLE
             }
         }
     }
@@ -70,17 +74,17 @@ class CategoryManagerFragment : BaseFragmentBinding<FragmentCategoryManagerBindi
             edtSearch.setOnFocusChangeListener { view, hasFocus ->
                 tvCancel.visibility = if (hasFocus) View.VISIBLE else  View.GONE
             }
+            backBtn.setOnClickListener(this@CategoryManagerFragment)
         }
         binding.btnAddCategory.setOnClickListener {
-            findNavController().navigate(CategoryManagerFragmentDirections.actionCategoryManageDestToAddCategoryFragment())
+            findNavController().navigate(R.id.action_category_manage_dest_to_addCategoryFragment)
         }
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.btnLogin -> {
-                val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
-                findNavController().navigate(action)
+            R.id.backBtn -> {
+                handleBack()
             }
             R.id.tvCancel -> {
                 binding.searchBar.apply {
@@ -96,7 +100,6 @@ class CategoryManagerFragment : BaseFragmentBinding<FragmentCategoryManagerBindi
     }
 
     override fun handleBack() {
-        val action = CategoryManagerFragmentDirections.actionCategoryManageDestToProfileDest()
-        findNavController().navigate(action)
+        findNavController().navigate(R.id.action_category_manage_dest_to_profile_dest)
     }
 }

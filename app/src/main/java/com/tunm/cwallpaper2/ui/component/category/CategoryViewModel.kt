@@ -37,6 +37,7 @@ class CategoryViewModel @Inject constructor(
         if (usersRepository.isLogin()) {
             val currentUserId = usersRepository.getCurrentUser()?.uid
             if (currentUserId != null) {
+                _addCategoryResponse.value = FirebaseStatus.Loading()
                 viewModelScope.launch {
                     categoryRepository.getAllCategories(currentUserId)
                         .collect {
