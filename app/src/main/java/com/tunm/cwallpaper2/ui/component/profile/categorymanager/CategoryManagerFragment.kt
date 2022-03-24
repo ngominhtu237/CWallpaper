@@ -1,4 +1,4 @@
-package com.tunm.cwallpaper2.ui.component.category
+package com.tunm.cwallpaper2.ui.component.profile.categorymanager
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -26,7 +26,7 @@ class CategoryManagerFragment : BaseFragmentBinding<FragmentCategoryManagerBindi
     private val loginViewModel: LoginViewModel by activityViewModels()
     private val categoryViewModel: CategoryViewModel by activityViewModels()
 
-    private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var categoryManagerAdapter: CategoryManagerAdapter
 
     override fun observeViewModel() {
         observe(categoryViewModel.listCategoryResponse) {
@@ -41,7 +41,7 @@ class CategoryManagerFragment : BaseFragmentBinding<FragmentCategoryManagerBindi
                 status.data?.forEach {
                     Timber.d("data - ${it.categoryName}, ")
                 }
-                status.data?.let { categoryAdapter.updateData(it) }
+                status.data?.let { categoryManagerAdapter.updateData(it) }
                 binding.loadingView.visibility = View.GONE
             }
             is FirebaseStatus.Error -> {
@@ -60,11 +60,11 @@ class CategoryManagerFragment : BaseFragmentBinding<FragmentCategoryManagerBindi
     }
 
     private fun initRecycleView() {
-        categoryAdapter = CategoryAdapter(emptyList())
+        categoryManagerAdapter = CategoryManagerAdapter(emptyList())
         binding.categoryRv.apply {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(SimpleItemDecoration(context, 16))
-            adapter = categoryAdapter
+            adapter = categoryManagerAdapter
         }
     }
 

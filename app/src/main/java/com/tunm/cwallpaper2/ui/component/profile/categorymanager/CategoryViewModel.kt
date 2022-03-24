@@ -1,11 +1,9 @@
-package com.tunm.cwallpaper2.ui.component.category
+package com.tunm.cwallpaper2.ui.component.profile.categorymanager
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.tunm.cwallpaper2.data.dto.auth.AuthRequest
 import com.tunm.cwallpaper2.data.dto.category.Category
-import com.tunm.cwallpaper2.data.dto.category.CategoryRequest
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
 import com.tunm.cwallpaper2.data.repo.category.CategoryRepository
 import com.tunm.cwallpaper2.data.repo.user.UsersRepository
@@ -37,7 +35,7 @@ class CategoryViewModel @Inject constructor(
         if (usersRepository.isLogin()) {
             val currentUserId = usersRepository.getCurrentUser()?.uid
             if (currentUserId != null) {
-                _addCategoryResponse.value = FirebaseStatus.Loading()
+                _listCategoryResponse.value = FirebaseStatus.Loading()
                 viewModelScope.launch {
                     categoryRepository.getAllCategories(currentUserId)
                         .collect {

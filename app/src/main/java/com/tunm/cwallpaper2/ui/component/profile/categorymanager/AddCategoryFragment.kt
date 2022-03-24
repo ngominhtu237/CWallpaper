@@ -1,11 +1,10 @@
-package com.tunm.cwallpaper2.ui.component.category
+package com.tunm.cwallpaper2.ui.component.profile.categorymanager
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels

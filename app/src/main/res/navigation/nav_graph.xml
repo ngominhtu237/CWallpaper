@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/category_dest"
-        android:name="com.tunm.cwallpaper2.CategoryFragment"
+        android:name="com.tunm.cwallpaper2.ui.component.home.CategoryFragment"
         android:label="@string/category"
         tools:layout="@layout/fragment_category" />
 
@@ -62,7 +62,7 @@
         </fragment>
         <fragment
             android:id="@+id/category_manage_dest"
-            android:name="com.tunm.cwallpaper2.ui.component.category.CategoryManagerFragment"
+            android:name="com.tunm.cwallpaper2.ui.component.profile.categorymanager.CategoryManagerFragment"
             android:label="@string/category"
             tools:layout="@layout/fragment_category_manager">
             <action
@@ -84,7 +84,7 @@
         </fragment>
         <fragment
             android:id="@+id/add_category_dest"
-            android:name="com.tunm.cwallpaper2.ui.component.category.AddCategoryFragment"
+            android:name="com.tunm.cwallpaper2.ui.component.profile.categorymanager.AddCategoryFragment"
             android:label="fragment_add_category"
             tools:layout="@layout/fragment_add_category">
             <action

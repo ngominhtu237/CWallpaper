@@ -1,4 +1,4 @@
-package com.tunm.cwallpaper2.ui.component.category
+package com.tunm.cwallpaper2.ui.component.profile.categorymanager
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import com.tunm.cwallpaper2.data.dto.category.Category
 import com.tunm.cwallpaper2.databinding.ItemCategoryBinding
 import com.tunm.cwallpaper2.ui.base.recyclerview.BaseAdapter
 
-class CategoryAdapter(
+class CategoryManagerAdapter(
     private val listCategory: List<Category>
 ): BaseAdapter<ItemCategoryBinding, Category>(listCategory) {
 
