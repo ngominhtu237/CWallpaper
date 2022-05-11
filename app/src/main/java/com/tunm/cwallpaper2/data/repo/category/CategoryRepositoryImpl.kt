@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.tunm.cwallpaper2.data.dto.category.Category
 import com.tunm.cwallpaper2.data.remote.firebase.CategoryFirebaseDataSource
 import com.tunm.cwallpaper2.data.remote.firebase.FirebaseStatus
-import com.tunm.cwallpaper2.utils.Validator
 import kotlinx.coroutines.flow.Flow
 
 class CategoryRepositoryImpl(
@@ -24,7 +23,11 @@ class CategoryRepositoryImpl(
         return categoryFirebaseDataSource.deleteCategoryByAdmin(categoryId)
     }
 
-    override suspend fun getAllCategories(userId: String): Flow<FirebaseStatus<ArrayList<Category>>> {
-        return categoryFirebaseDataSource.getAllCategories(userId)
+    override suspend fun getAllCategoriesWithUser(userId: String): Flow<FirebaseStatus<ArrayList<Category>>> {
+        return categoryFirebaseDataSource.getAllCategoriesWithUser(userId)
+    }
+
+    override suspend fun getAllCategories(): Flow<FirebaseStatus<ArrayList<Category>>> {
+        return categoryFirebaseDataSource.getAllCategories()
     }
 }

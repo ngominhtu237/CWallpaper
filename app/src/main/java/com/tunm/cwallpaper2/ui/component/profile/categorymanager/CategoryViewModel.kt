@@ -31,13 +31,13 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-    fun getAllCategories() {
+    fun getAllCategoriesWithUser() {
         if (usersRepository.isLogin()) {
             val currentUserId = usersRepository.getCurrentUser()?.uid
             if (currentUserId != null) {
                 _listCategoryResponse.value = FirebaseStatus.Loading()
                 viewModelScope.launch {
-                    categoryRepository.getAllCategories(currentUserId)
+                    categoryRepository.getAllCategoriesWithUser(currentUserId)
                         .collect {
                             _listCategoryResponse.value = it
                         }
@@ -47,6 +47,16 @@ class CategoryViewModel @Inject constructor(
             }
         } else {
             _listCategoryResponse.value = FirebaseStatus.Error("Error: User not login")
+        }
+    }
+
+    fun getAllCategories() {
+        _listCategoryResponse.value = FirebaseStatus.Loading()
+        viewModelScope.launch {
+            categoryRepository.getAllCategories()
+                .collect {
+                    _listCategoryResponse.value = it
+                }
         }
     }
 }

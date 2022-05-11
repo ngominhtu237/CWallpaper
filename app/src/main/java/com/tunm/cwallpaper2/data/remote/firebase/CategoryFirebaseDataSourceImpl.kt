@@ -181,7 +181,7 @@ class CategoryFirebaseDataSourceImpl(
 //        return firebaseStatusLiveData
 //    }
 
-    override suspend fun getAllCategories(userId: String): Flow<FirebaseStatus<ArrayList<Category>>> {
+    override suspend fun getAllCategoriesWithUser(userId: String): Flow<FirebaseStatus<ArrayList<Category>>> {
         val listCategory = arrayListOf<Category>()
         val categoryRef = databaseRef.child("Categories")
 
@@ -197,6 +197,33 @@ class CategoryFirebaseDataSourceImpl(
                             }
                         } else {
                             // this@callbackFlow.trySendBlocking(FirebaseStatus.Error<ArrayList<Category>>("Category null"))
+                        }
+                        trySend(FirebaseStatus.Success(listCategory))
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    this@callbackFlow.trySendBlocking(FirebaseStatus.Error<ArrayList<Category>>(error.message))
+                }
+
+            }
+            categoryRef.addValueEventListener(valueEventListener)
+            awaitClose { categoryRef.removeEventListener(valueEventListener) }
+        }
+    }
+
+    override suspend fun getAllCategories(): Flow<FirebaseStatus<ArrayList<Category>>> {
+        val listCategory = arrayListOf<Category>()
+        val categoryRef = databaseRef.child("Categories")
+
+        return callbackFlow {
+            val valueEventListener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    listCategory.clear()
+                    for (ds in snapshot.children) {
+                        val category = ds.getValue(Category::class.java)
+                        if (category != null) {
+                            listCategory.add(category)
                         }
                         trySend(FirebaseStatus.Success(listCategory))
                     }

@@ -55,7 +55,7 @@ class CategoryManagerFragment : BaseFragmentBinding<FragmentCategoryManagerBindi
     }
 
     override fun initUI() {
-        categoryViewModel.getAllCategories()
+        categoryViewModel.getAllCategoriesWithUser()
         initRecycleView()
     }
 

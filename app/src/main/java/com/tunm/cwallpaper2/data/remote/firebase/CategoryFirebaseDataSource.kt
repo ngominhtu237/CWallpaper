@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface CategoryFirebaseDataSource {
     suspend fun addCategoryByAdmin(categoryRequest: Category): FirebaseStatus<String>
     fun deleteCategoryByAdmin(categoryId: String): MutableLiveData<FirebaseStatus<String>>
-    suspend fun getAllCategories(userId: String): Flow<FirebaseStatus<ArrayList<Category>>>
+    suspend fun getAllCategoriesWithUser(userId: String): Flow<FirebaseStatus<ArrayList<Category>>>
+    suspend fun getAllCategories(): Flow<FirebaseStatus<ArrayList<Category>>>
 }
